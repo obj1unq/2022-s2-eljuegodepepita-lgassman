@@ -1,0 +1,29 @@
+import wollok.game.*
+import pepita.*
+import silvestre.*
+import extras.*
+import direcciones.*
+
+program pepitaGame {
+
+	
+	
+	game.height(10)
+	game.width(10)
+	game.addVisual(silvestre)
+	game.addVisual(pepita)
+	game.addVisual(visorEnergiaPepita)
+	game.showAttributes(pepita)
+	
+	keyboard.left().onPressDo( { pepita.mover(izquierda) }  )
+	keyboard.right().onPressDo( { pepita.mover(derecha) }  )
+	keyboard.up().onPressDo( { pepita.mover(arriba) }  )
+	keyboard.down().onPressDo( { pepita.mover(abajo) }  )
+	
+	
+	//game.cellSize(20)
+	game.boardGround("fondo2.jpg")
+	game.start()
+	
+
+}
