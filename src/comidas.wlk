@@ -1,4 +1,5 @@
 import wollok.game.*
+import randomizer.*
 
 object manzana {
 
@@ -17,6 +18,16 @@ object manzana {
 		madurez = madurez + 1
 	}
 
+	method serComidaPor(personaje) {
+		personaje.comer(self)
+		game.removeVisual(self)
+		game.addVisualIn(self, randomizer.position())
+	}
+
+	method colisioneCon(personaje) {
+	// no pasa nada, a no ser que vaya por el evento de presionar la letra C
+	}
+
 }
 
 object alpiste {
@@ -27,6 +38,16 @@ object alpiste {
 
 	method energiaQueOtorga() {
 		return 20
+	}
+
+	method serComidaPor(personaje) {
+		personaje.comer(self)
+		game.removeVisual(self)
+		game.addVisualIn(self, randomizer.position())
+	}
+
+	method colisioneCon(personaje) {
+	// no pasa nada, a no ser que vaya por el evento de presionar la letra C
 	}
 
 }

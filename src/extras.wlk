@@ -15,6 +15,16 @@ object visorEnergiaPepita {
 		return "ff0000ff"
 	}
 	
+	method serComidaPor(personaje) {
+		// No hace nada ya que no es un elemento comestible
+	}
+	
+	
+}
+
+
+object nido {
+	
 	
 	
 }

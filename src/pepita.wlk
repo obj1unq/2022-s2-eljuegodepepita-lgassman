@@ -5,7 +5,8 @@ object pepita {
 
 	var property position = game.at(5, 7)
 	var property cazador = silvestre
-	var energia = 100
+	var energia = 200
+	var property atrapada = false
 
 	method image() {
 		return "pepita-" + self.nombreEstado() + ".png"
@@ -31,10 +32,6 @@ object pepita {
 		return energia <= 0
 	}
 
-	method atrapada() {
-		return cazador.position() == self.position()
-	}
-
 //	method text() {
 //		return "HOLA!!! SOY PEPITA"
 //	}
@@ -42,13 +39,11 @@ object pepita {
 //	method textColor() {
 //		return "FF0000FF"
 //	}
-//	method position() {
-//		return position
-//	}
-//	
-//	method position(_position) {
-//		position = _position
-//	}
+	method comerComestibles() {
+		const comidas = game.colliders(self)
+		comidas.forEach({ comida => comida.serComidaPor(self)})
+	}
+
 	method comer(comida) {
 		energia = energia + comida.energiaQueOtorga()
 	}
@@ -60,7 +55,7 @@ object pepita {
 
 	method validarVuelo(distancia) {
 		if (not self.puedeVolar(distancia)) {
-			self.error("La distancia " + distancia + " es mayor a la energia " + energia)
+			self.terminar("La distancia " + distancia + " es mayor a la energia " + energia)
 		}
 	}
 
@@ -82,5 +77,16 @@ object pepita {
 		return energia >= self.energiaParaVolar(distancia)
 	}
 
+	method terminar(mensaje) {
+		game.say(self, mensaje)
+		// TODO on tick, despues de dos segundos se hace el stop, primero muestra el mensaje
+		game.stop()
+	}
+	
+	method muere() {
+		self.atrapada(true)
+		self.terminar("Me atrapó Silvestre. Game Over")
+	}
+	
 }
 
